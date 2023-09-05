@@ -27,7 +27,5 @@ func Register(c echo.Context, client pb.AuthServiceClient) error {
 	}
 
 	// I think if pass pointer will be a little performance optimization ;)
-	c.JSON(int(res.Status), &res)
-
-	return nil
+	return c.JSON(int(res.Status), &res)
 }

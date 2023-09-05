@@ -15,8 +15,7 @@ func Login(c echo.Context, client pb.AuthServiceClient) error {
 	body := LoginRequestBody{}
 
 	if err := c.Bind(&body); err != nil {
-		echo.NewHTTPError(http.StatusBadRequest, err)
-		return err
+		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
 	res, err := client.Login(c.Request().Context(), &pb.LoginRequest{
@@ -24,10 +23,11 @@ func Login(c echo.Context, client pb.AuthServiceClient) error {
 		Password: body.Password,
 	})
 	if err != nil {
-		echo.NewHTTPError(int(res.Status), res.Error)
+		return echo.NewHTTPError(http.StatusBadGateway, err.Error())
+
 	}
 
-	c.JSON(int(res.Status), &body)
+	c.JSON(int(res.Status), &res)
 
 	return nil
 }

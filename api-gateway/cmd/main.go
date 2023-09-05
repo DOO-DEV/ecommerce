@@ -7,6 +7,7 @@ import (
 	"api-gateway/pkg/product"
 	"fmt"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"log"
 )
 
@@ -18,6 +19,10 @@ func main() {
 	}
 
 	e := echo.New()
+
+	e.Use(middleware.RequestID())
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
 	authSvc := *auth.RegisterRoutes(e, &c)
 
