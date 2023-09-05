@@ -11,12 +11,11 @@ type RegisterRequestBody struct {
 	Password string `json:"password"`
 }
 
-func Register(c echo.Context, client pb.AuthServiceClient) {
+func Register(c echo.Context, client pb.AuthServiceClient) error {
 	body := RegisterRequestBody{}
 
 	if err := c.Bind(&body); err != nil {
-		echo.NewHTTPError(http.StatusBadRequest, err)
-		return
+		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
 	res, err := client.Register(c.Request().Context(), &pb.RegisterRequest{
@@ -24,9 +23,11 @@ func Register(c echo.Context, client pb.AuthServiceClient) {
 		Password: body.Password,
 	})
 	if err != nil {
-		echo.NewHTTPError(int(res.Status), res.Error)
+		return echo.NewHTTPError(int(res.Status), res.Error)
 	}
 
 	// I think if pass pointer will be a little performance optimization ;)
 	c.JSON(int(res.Status), &res)
+	
+	return nil
 }
