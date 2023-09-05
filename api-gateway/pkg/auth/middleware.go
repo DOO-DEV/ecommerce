@@ -15,7 +15,7 @@ func InitAuthMiddleware(svc *ServiceClient) MiddlewareConfig {
 	return MiddlewareConfig{svc: svc}
 }
 
-func (m *MiddlewareConfig) AuthRequired(c echo.Context) echo.MiddlewareFunc {
+func (m *MiddlewareConfig) AuthRequired() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			authorization := c.Request().Header.Get("Authorization")
