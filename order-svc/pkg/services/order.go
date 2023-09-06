@@ -24,7 +24,6 @@ func (s Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*p
 	} else if product.Data.Stock < req.Quantity {
 		return &pb.CreateOrderResponse{Status: http.StatusConflict, Error: product.Error}, nil
 	}
-
 	order := models.Order{
 		Price:     product.Data.Price,
 		ProductId: req.ProductId,

@@ -8,5 +8,4 @@ language and technology used in this project:
 * JWT
 
 communication between these microservices is with grpc and protobuf messages.
-
-
+![alt text](./diagram.png)
