@@ -20,11 +20,11 @@ func InitProductServiceClient(url string) ProductServiceClient {
 	return ProductServiceClient{Client: pb.NewProductServiceClient(cc)}
 }
 
-func (c *ProductServiceClient) FindOne(ctx context.Context, productID int64) (*pb.FindOneResponse, error) {
+func (c ProductServiceClient) FindOne(ctx context.Context, productID int64) (*pb.FindOneResponse, error) {
 	return c.Client.FindOne(ctx, &pb.FindOneRequest{Id: productID})
 }
 
-func (c *ProductServiceClient) DecreaseStock(ctx context.Context, productID, orderID int64) (*pb.DecreaseStockResponse, error) {
+func (c ProductServiceClient) DecreaseStock(ctx context.Context, productID, orderID int64) (*pb.DecreaseStockResponse, error) {
 	return c.Client.DecreaseStock(ctx, &pb.DecreaseStockRequest{
 		Id:      productID,
 		OrderId: orderID,

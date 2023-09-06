@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"time"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 	jwt := utils.JWTWrapper{
 		SecretKey:       c.JWTSecretKey,
 		Issuer:          "go-grpc-auth-svc",
-		ExpirationHours: 24 * 365,
+		ExpirationHours: time.Hour * 3,
 	}
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", c.Port))

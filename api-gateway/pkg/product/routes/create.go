@@ -20,12 +20,14 @@ func CreateProduct(c echo.Context, client pb.ProductServiceClient) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
-	res, err := client.CreateProduct(c.Request().Context(), &pb.CreateProductRequest{
+	req := &pb.CreateProductRequest{
 		Name:  b.Name,
 		Sku:   b.Sku,
 		Stock: b.Stock,
 		Price: b.Price,
-	})
+	}
+
+	res, err := client.CreateProduct(c.Request().Context(), req)
 	if err != nil {
 		return echo.NewHTTPError(int(res.Status), res.Error)
 	}

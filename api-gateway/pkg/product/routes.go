@@ -15,7 +15,7 @@ func RegisterRoutes(e *echo.Echo, c *config.Config, authSvc *auth.ServiceClient)
 	}
 
 	routes := e.Group("/product", a.AuthRequired())
-	routes.POST("/", svc.CreateProduct)
+	routes.POST("", svc.CreateProduct)
 	routes.GET("/:id", svc.FindOne)
 }
 

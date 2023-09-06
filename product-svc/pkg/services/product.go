@@ -17,7 +17,7 @@ func (s Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest)
 	product := models.Product{
 		Name:  req.Name,
 		Stock: req.Stock,
-		Price: req.Stock,
+		Price: req.Price,
 	}
 
 	if result := s.H.DB.WithContext(ctx).Create(&product); result.Error != nil {

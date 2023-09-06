@@ -31,5 +31,3 @@ func CreateOrder(c echo.Context, client pb.OrderServiceClient) error {
 
 	return c.JSON(http.StatusCreated, &res)
 }
-
-

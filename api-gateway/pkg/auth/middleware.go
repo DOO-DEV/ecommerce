@@ -20,24 +20,19 @@ func (m *MiddlewareConfig) AuthRequired() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			authorization := c.Request().Header.Get("Authorization")
 			if authorization == "" {
-				echo.NewHTTPError(http.StatusUnauthorized)
-				return nil
+				return echo.NewHTTPError(http.StatusUnauthorized)
 			}
 
 			jwtToken := strings.Split(authorization, "Bearer ")
 			if len(jwtToken) < 2 {
-				echo.NewHTTPError(http.StatusUnauthorized)
-				return nil
+				return echo.NewHTTPError(http.StatusUnauthorized)
 			}
-
 			res, err := m.svc.Client.Validate(c.Request().Context(), &pb.ValidateRequest{Token: jwtToken[1]})
 			if err != nil {
-				echo.NewHTTPError(int(res.Status), res.Error)
-				return nil
+				return echo.NewHTTPError(int(res.Status), res.Error)
 			}
 
 			c.Set("userID", res.UserId)
-
 			return next(c)
 		}
 	}

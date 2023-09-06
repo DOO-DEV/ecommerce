@@ -29,6 +29,7 @@ func (s Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*p
 		Price:     product.Data.Price,
 		ProductId: req.ProductId,
 		UserId:    req.UserId,
+		Quantity:  req.Quantity,
 	}
 
 	s.H.DB.Create(&order)

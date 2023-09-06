@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: pkg/pb/product.go.proto
+// source: pkg/pb/product.proto
 
 package pb
 
@@ -37,7 +37,7 @@ func NewProductServiceClient(cc grpc.ClientConnInterface) ProductServiceClient {
 
 func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*CreateProductResponse, error) {
 	out := new(CreateProductResponse)
-	err := c.cc.Invoke(ctx, "/product.go.ProductService/CreateProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/CreateProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProd
 
 func (c *productServiceClient) FindOne(ctx context.Context, in *FindOneRequest, opts ...grpc.CallOption) (*FindOneResponse, error) {
 	out := new(FindOneResponse)
-	err := c.cc.Invoke(ctx, "/product.go.ProductService/FindOne", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/FindOne", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *productServiceClient) FindOne(ctx context.Context, in *FindOneRequest, 
 
 func (c *productServiceClient) DecreaseStock(ctx context.Context, in *DecreaseStockRequest, opts ...grpc.CallOption) (*DecreaseStockResponse, error) {
 	out := new(DecreaseStockResponse)
-	err := c.cc.Invoke(ctx, "/product.go.ProductService/DecreaseStock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/DecreaseStock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func _ProductService_CreateProduct_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/product.go.ProductService/CreateProduct",
+		FullMethod: "/product.ProductService/CreateProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).CreateProduct(ctx, req.(*CreateProductRequest))
@@ -126,7 +126,7 @@ func _ProductService_FindOne_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/product.go.ProductService/FindOne",
+		FullMethod: "/product.ProductService/FindOne",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).FindOne(ctx, req.(*FindOneRequest))
@@ -144,7 +144,7 @@ func _ProductService_DecreaseStock_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/product.go.ProductService/DecreaseStock",
+		FullMethod: "/product.ProductService/DecreaseStock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductServiceServer).DecreaseStock(ctx, req.(*DecreaseStockRequest))
@@ -156,7 +156,7 @@ func _ProductService_DecreaseStock_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "product.go.ProductService",
+	ServiceName: "product.ProductService",
 	HandlerType: (*ProductServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -173,5 +173,5 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pkg/pb/product.go.proto",
+	Metadata: "pkg/pb/product.proto",
 }

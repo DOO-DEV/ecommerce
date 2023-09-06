@@ -15,7 +15,7 @@ func RegisterRoutes(e *echo.Echo, c *config.Config, authSvc *auth.ServiceClient)
 	}
 
 	routes := e.Group("/order", a.AuthRequired())
-	routes.POST("/", svc.CreateOrder)
+	routes.POST("", svc.CreateOrder)
 }
 
 func (svc *ServiceClient) CreateOrder(c echo.Context) error {
